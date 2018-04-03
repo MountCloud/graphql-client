@@ -12,7 +12,7 @@ public abstract class GraphqlQuery extends GraphqlRequest {
     /**
      * 不可见的构造
      *
-     * @param requestName
+     * @param requestName query的名字
      */
     protected GraphqlQuery(String requestName) {
         super(requestName);

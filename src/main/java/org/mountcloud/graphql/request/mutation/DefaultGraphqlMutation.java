@@ -10,7 +10,7 @@ public class DefaultGraphqlMutation extends GraphqlMutation {
     /**
      * 构造
      *
-     * @param requestName
+     * @param requestName mutaion 的名字
      */
     public DefaultGraphqlMutation(String requestName) {
         super(requestName);

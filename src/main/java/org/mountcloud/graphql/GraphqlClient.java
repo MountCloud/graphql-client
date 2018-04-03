@@ -62,6 +62,7 @@ public class GraphqlClient {
      * @param query exec query
      * @param <T> query
      * @return response
+     * @throws IOException Exception
      */
     public <T extends GraphqlQuery> GraphqlResponse doQuery(T query) throws IOException {
         return doQuery(query, GraphqlRequestType.POST);
@@ -73,6 +74,7 @@ public class GraphqlClient {
      * @param graphqlRequestType request type get or post,but no get now
      * @param <T> 继承 query
      * @return response
+     * @throws IOException Exception
      */
     public <T extends GraphqlQuery> GraphqlResponse doQuery(T query, GraphqlRequestType graphqlRequestType) throws IOException {
         String json = query.toString();
@@ -90,6 +92,7 @@ public class GraphqlClient {
      * @param mutation exec mutation
      * @param <T> Mutation
      * @return response
+     * @throws IOException Exception
      */
     public <T extends GraphqlMutation> GraphqlResponse doMutation(T mutation) throws IOException {
         return doMutation(mutation,GraphqlRequestType.POST);
@@ -101,6 +104,7 @@ public class GraphqlClient {
      * @param graphqlRequestType request type get or post,but no get now
      * @param <T>  Mutation
      * @return response
+     * @throws IOException Exception
      */
     public <T extends GraphqlMutation> GraphqlResponse doMutation(T mutation, GraphqlRequestType graphqlRequestType) throws IOException {
         String json = mutation.toString();
@@ -120,7 +124,7 @@ public class GraphqlClient {
      * @param json 发送的json
      * @param type 发送方式
      * @return 返回执行结果
-     * @throws IOException
+     * @throws IOException  Exception
      */
     private String doHttpRequest(String json,GraphqlRequestType type) throws IOException {
         String result = null;
@@ -134,7 +138,7 @@ public class GraphqlClient {
 
     /**
      * 设置http的头
-     * @param headers
+     * @param headers http handers
      */
     public void setHttpHeaders(Map<String,String> headers){
         this.httpHeaders = headers;

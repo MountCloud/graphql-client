@@ -19,9 +19,9 @@ public class RequestParameter extends HashMap<String,Object> {
     }
 
     /**
-     * 添加一个属性
-     * @param key
-     * @param obj
+     * 添加一个请求参数
+     * @param key 参数名
+     * @param obj 参数户的值
      * @return
      */
     public RequestParameter addParameter(String key, Object obj){
@@ -30,8 +30,8 @@ public class RequestParameter extends HashMap<String,Object> {
     }
 
     /**
-     * 从Map初始化
-     * @param map
+     * 将Map内的值全部转为请求参数
+     * @param map 需要转换的map
      * @return
      */
     public static RequestParameter buildByMap(Map map){
@@ -40,6 +40,10 @@ public class RequestParameter extends HashMap<String,Object> {
         return requestParameter;
     }
 
+    /**
+     * build一个graphql client
+     * @return graphql client
+     */
     public static RequestParameter build(){
         RequestParameter requestParameter = new RequestParameter();
         return requestParameter;
@@ -74,8 +78,8 @@ public class RequestParameter extends HashMap<String,Object> {
 
     /**
      * 根据值类型返回相应的字符串
-     * @param val
-     * @return
+     * @param val 值
+     * @return 封装后的字符串
      */
     private String packVal(Object val){
         if(val==null){

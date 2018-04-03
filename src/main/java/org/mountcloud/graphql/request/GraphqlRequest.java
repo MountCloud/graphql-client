@@ -88,7 +88,7 @@ public abstract class GraphqlRequest {
 
     /**
      * 转为一个可用的json
-     * @return
+     * @return 返回requet的json字符串
      */
     @Override
     public String toString() {

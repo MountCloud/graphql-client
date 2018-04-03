@@ -21,8 +21,8 @@ public class ResultAttributtes {
 
     /**
      * 添加返回内容
-     * @param resultAttr
-     * @return
+     * @param resultAttr result data names
+     * @return ResultAttributtes
      */
     public ResultAttributtes addResultAttributes(String... resultAttr){
         if(resultAttr!=null&&resultAttr.length>0){
@@ -37,8 +37,8 @@ public class ResultAttributtes {
 
     /**
      * 添加返回内容
-     * @param resultAttr
-     * @return
+     * @param resultAttr result data names
+     * @return ResultAttributtes
      */
     public ResultAttributtes addResultAttributes(ResultAttributtes... resultAttr){
         if(resultAttr!=null&&resultAttr.length>0){
