@@ -13,20 +13,30 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 2018/2/11. graphql client
  * @author zhanghaishan
  * @version V1.0
- * @Package com.ugirls.util
- * @Description: TODO 自己动手丰衣足食，网上没有那就自己写呗
- * @date 2018/2/11.
  */
 public class GraphqlClient {
 
+    /**
+     * http 工具
+     */
     private HttpClientUtil httpClientUtil = new HttpClientUtil();
 
+    /**
+     * graphql server 地址
+     */
     private String graphqlServerUrl = null;
 
+    /**
+     * http 请求的头
+     */
     private Map<String,String> httpHeaders = new HashMap<String,String>();
 
+    /**
+     * json mapper
+     */
     private ObjectMapper objectMapper = new ObjectMapper();
 
     /**
@@ -40,7 +50,7 @@ public class GraphqlClient {
     /**
      * 构建一个Graphql客户端
      * @param graphqlUrl  graphql server url
-     * @return
+     * @return GraphqlClient
      */
     public static GraphqlClient buildGraphqlClient(String graphqlUrl){
         GraphqlClient graphqlClient = new GraphqlClient(graphqlUrl);
@@ -50,8 +60,8 @@ public class GraphqlClient {
     /**
      * 执行查询
      * @param query exec query
-     * @param <T>
-     * @return
+     * @param <T> query
+     * @return response
      */
     public <T extends GraphqlQuery> GraphqlResponse doQuery(T query) throws IOException {
         return doQuery(query, GraphqlRequestType.POST);
@@ -61,8 +71,8 @@ public class GraphqlClient {
      * 执行查询
      * @param query  exec query
      * @param graphqlRequestType request type get or post,but no get now
-     * @param <T>
-     * @return
+     * @param <T> 继承 query
+     * @return response
      */
     public <T extends GraphqlQuery> GraphqlResponse doQuery(T query, GraphqlRequestType graphqlRequestType) throws IOException {
         String json = query.toString();
@@ -78,8 +88,8 @@ public class GraphqlClient {
     /**
      * 执行操作
      * @param mutation exec mutation
-     * @param <T>
-     * @return
+     * @param <T> Mutation
+     * @return response
      */
     public <T extends GraphqlMutation> GraphqlResponse doMutation(T mutation) throws IOException {
         return doMutation(mutation,GraphqlRequestType.POST);
@@ -89,8 +99,8 @@ public class GraphqlClient {
      * 执行操作
      * @param mutation exec mutation
      * @param graphqlRequestType request type get or post,but no get now
-     * @param <T>
-     * @return
+     * @param <T>  Mutation
+     * @return response
      */
     public <T extends GraphqlMutation> GraphqlResponse doMutation(T mutation, GraphqlRequestType graphqlRequestType) throws IOException {
         String json = mutation.toString();

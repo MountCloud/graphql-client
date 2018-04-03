@@ -21,11 +21,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 2018/2/10. http util
  * @author zhanghaishan
  * @version V1.0
- * @Package com.ugirls.util
- * @Description: TODO
- * @date 2018/2/10.
  */
 public class HttpClientUtil {
 

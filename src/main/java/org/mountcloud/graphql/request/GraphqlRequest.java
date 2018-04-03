@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 2018/2/11. 所有请求父类
  * @author zhanghaishan
  * @version V1.0
- * @Package com.ugirls.graphql.request
- * @Description: TODO 所有请求父类
- * @date 2018/2/11.
  */
 public abstract class GraphqlRequest {
 
@@ -30,9 +28,9 @@ public abstract class GraphqlRequest {
 
     /**
      * 添加请求的参数
-     * @param key
-     * @param val
-     * @return
+     * @param key 参数名
+     * @param val 参数的值
+     * @return RequestParameter
      */
     public RequestParameter addParameter(String key, Object val){
         return getRequestParameter().addParameter(key,val);
@@ -40,7 +38,7 @@ public abstract class GraphqlRequest {
 
     /**
      * 返回参数列表
-     * @return
+     * @return RequestParameter
      */
     public RequestParameter getRequestParameter(){
         if(this.requestParameter==null){
@@ -51,8 +49,8 @@ public abstract class GraphqlRequest {
 
     /**
      * 添加返回内容
-     * @param resultAttr
-     * @return
+     * @param resultAttr result names
+     * @return GraphqlRequest
      */
     public GraphqlRequest addResultAttributes(String... resultAttr){
         if(resultAttr!=null&&resultAttr.length>0){
@@ -67,8 +65,8 @@ public abstract class GraphqlRequest {
 
     /**
      * 添加返回内容
-     * @param resultAttr
-     * @return
+     * @param resultAttr result objects
+     * @return GraphqlRequest
      */
     public GraphqlRequest addResultAttributes(ResultAttributtes... resultAttr){
         if(resultAttr!=null&&resultAttr.length>0){

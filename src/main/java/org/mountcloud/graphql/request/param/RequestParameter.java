@@ -5,11 +5,9 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * 2018/2/11. 请求的参数
  * @author zhanghaishan
  * @version V1.0
- * @Package com.ugirls.graphql.request.param
- * @Description: TODO
- * @date 2018/2/11.
  */
 public class RequestParameter extends HashMap<String,Object> {
 
@@ -49,7 +47,7 @@ public class RequestParameter extends HashMap<String,Object> {
 
     /**
      * 直接转为可用的string
-     * @return
+     * @return request string
      */
     @Override
     public String toString() {

@@ -3,11 +3,9 @@ package org.mountcloud.graphql.request.mutation;
 import org.mountcloud.graphql.request.GraphqlRequest;
 
 /**
+ *  2018/2/11. Mutation父类
  * @author zhanghaishan
  * @version V1.0
- * @Package com.ugirls.graphql.mutation
- * @Description: TODO Mutation父类
- * @date 2018/2/11.
  */
 public abstract class GraphqlMutation extends GraphqlRequest {
 

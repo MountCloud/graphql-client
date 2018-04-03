@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 2018/3/9. 需要返回的结果 return data names
  * @author zhanghaishan
  * @version V1.0
- * @Package com.ugirls.graphql.request.result
- * @Description: TODO
- * @date 2018/3/9.
  */
 public class ResultAttributtes {
 

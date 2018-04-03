@@ -1,11 +1,9 @@
 package org.mountcloud.graphql.request;
 
 /**
+ * 2018/2/23. requets type 目前只有post
  * @author zhanghaishan
  * @version V1.0
- * @Package com.ugirls.graphql.request
- * @Description: TODO
- * @date 2018/2/23.
  */
 public enum GraphqlRequestType {
 

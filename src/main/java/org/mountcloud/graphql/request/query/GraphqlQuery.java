@@ -3,11 +3,9 @@ package org.mountcloud.graphql.request.query;
 import org.mountcloud.graphql.request.GraphqlRequest;
 
 /**
+ * 2018/2/11. query 的总父类
  * @author zhanghaishan
  * @version V1.0
- * @Package com.ugirls.graphql.query
- * @Description: TODO query父类
- * @date 2018/2/11.
  */
 public abstract class GraphqlQuery extends GraphqlRequest {
 

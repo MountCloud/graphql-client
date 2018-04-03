@@ -1,11 +1,9 @@
 package org.mountcloud.graphql.response;
 
 /**
+ * 2018/2/23. 返回结果状态
  * @author zhanghaishan
  * @version V1.0
- * @Package com.ugirls.graphql.response
- * @Description: TODO
- * @date 2018/2/23.
  */
 public enum  GraphqlState {
 
