@@ -5,7 +5,7 @@ The current version only supports post requests
 
 You need java1.8 and maven.
 
-Welcome to my home page:[Mount Cloud](http://www.mountclud.org)
+Welcome to my home page:[Mount Cloud](http://www.mountcloud.org)
 
 #Use You Project
 
