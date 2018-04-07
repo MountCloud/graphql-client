@@ -5,7 +5,7 @@
   <!-- jar包详情 -->
   <groupId>org.mountcloud</groupId>
   <artifactId>graphql-client</artifactId>
-  <version>1.0</version>
+  <version>1.1</version>
   <description>graphql java client</description>
 
   <!-- 项目包类型 -->
