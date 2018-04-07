@@ -56,11 +56,17 @@ public class RequestParameter extends HashMap<String,Object> {
     @Override
     public String toString() {
 
+
+        Set<String> keys = keySet();
+
+        if(keys.size()==0){
+            return "";
+        }
+
         String stringVal = "(";
 
         char connect = ',';
 
-        Set<String> keys = keySet();
         for(String key:keys){
             stringVal = stringVal+ key+":"+packVal(get(key))+connect;
         }
