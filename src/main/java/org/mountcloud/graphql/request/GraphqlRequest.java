@@ -113,9 +113,11 @@ public abstract class GraphqlRequest {
         String resultAttrStr = resultAttrBuffer.toString();
 
         requestBuffer.append(paramStr);
-        requestBuffer.append("{");
-        requestBuffer.append(resultAttrStr);
-        requestBuffer.append("}");
+        if(!resultAttrStr.equals("")) {
+            requestBuffer.append("{");
+            requestBuffer.append(resultAttrStr);
+            requestBuffer.append("}");
+        }
 
         return requestBuffer.toString();
     }
