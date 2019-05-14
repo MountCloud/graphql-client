@@ -56,7 +56,7 @@ public class GraphqlClientTest {
         final String result = "{\"query\":\"{findUser{name sex age}}\"}";
         GraphqlQuery query = new DefaultGraphqlQuery("findUser");
         query.addResultAttributes("name", "sex", "age");
-        Assert.assertEquals(query.toString(), result);
+        Assert.assertEquals(result,query.toString());
     }
 
     @Test
@@ -79,7 +79,7 @@ public class GraphqlClientTest {
         query.addResultAttributes(classAttributte, schoolAttributte);
 
 //        System.out.println(query.toString());
-        Assert.assertEquals(query.toString(),result);
+        Assert.assertEquals(result,query.toString());
     }
 
     @Test
@@ -87,7 +87,7 @@ public class GraphqlClientTest {
         final String result = "{\"query\":\"mutation{updateUser{name sex age}}\"}";
         GraphqlMutation mutation = new DefaultGraphqlMutation("updateUser");
         mutation.addResultAttributes("name", "sex", "age");
-        Assert.assertEquals(mutation.toString(), result);
+        Assert.assertEquals(result,mutation.toString());
     }
 
     @Test
@@ -99,7 +99,7 @@ public class GraphqlClientTest {
         mutation.addParameter("id",1).addParameter("name","123").addParameter("age",18);
 //add more complex attribute to see do query demo
 //        System.out.println(mutation);
-        Assert.assertEquals(mutation.toString(), result);
+        Assert.assertEquals(result,mutation.toString());
 
     }
 
@@ -117,13 +117,14 @@ public class GraphqlClientTest {
 
         graphql.addResultAttributes(results, location);
         System.out.println(graphql);
-        Assert.assertEquals(graphql.toString(),result);
+        Assert.assertEquals(result,graphql.toString());
     }
 
     @Test
     public void queryVariables() {
-        final String result = "{ \"query\": \"query($address: AddressQueryParameter!){findByFields(address: $address){found page results{ street zipCode district number state city } location{ lat lng }}}\",\"variables\":\"{\"address\":{zipCode:\\\"05103060\\\",number:123}\"}";
+        final String result = "{ \"query\": \"query($address: AddressQueryParameter!){address{findByFields(address: $address){found page results{ street zipCode district number state city location{ lat lng } }}}}\",\"variables\":{\"address\":{\"zipCode\":\"05103060\",\"number\":123}}}";
         Graphql graphql = new Graphql("findByFields(address: $address)", "$address: AddressQueryParameter!");
+        graphql.setGroup("address");
         graphql.addResultAttributes("found", "page");
 
         ResultAttributtes results = new ResultAttributtes("results");
@@ -132,7 +133,8 @@ public class GraphqlClientTest {
         ResultAttributtes location = new ResultAttributtes("location");
         location.addResultAttributes("lat", "lng");
 
-        graphql.addResultAttributes(results, location);
+        results.addResultAttributes(location);
+        graphql.addResultAttributes(results);
 
         RequestVariable variable = new RequestVariable("address");
         variable
@@ -141,6 +143,6 @@ public class GraphqlClientTest {
 
         graphql.setVariable(variable);
         System.out.println(graphql);
-        Assert.assertEquals(graphql.toString(),result);
+        Assert.assertEquals(result,graphql.toString());
     }
 }

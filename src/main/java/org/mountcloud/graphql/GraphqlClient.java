@@ -1,6 +1,7 @@
 package org.mountcloud.graphql;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.mountcloud.graphql.request.GraphqlRequest;
 import org.mountcloud.graphql.request.GraphqlRequestType;
 import org.mountcloud.graphql.request.mutation.GraphqlMutation;
 import org.mountcloud.graphql.request.query.GraphqlQuery;
@@ -27,12 +28,12 @@ public class GraphqlClient {
     /**
      * graphql server 地址
      */
-    private String graphqlServerUrl = null;
+    private String graphqlServerUrl;
 
     /**
      * http 请求的头
      */
-    private Map<String,String> httpHeaders = new HashMap<String,String>();
+    private Map<String,String> httpHeaders = new HashMap<>();
 
     /**
      * json mapper
@@ -67,6 +68,9 @@ public class GraphqlClient {
     public <T extends GraphqlQuery> GraphqlResponse doQuery(T query) throws IOException {
         return doQuery(query, GraphqlRequestType.POST);
     }
+    public <T extends GraphqlRequest> GraphqlResponse doQuery(T query) throws IOException {
+        return doQuery(query, GraphqlRequestType.POST);
+    }
 
     /**
      * 执行查询
@@ -77,6 +81,15 @@ public class GraphqlClient {
      * @throws IOException Exception
      */
     public <T extends GraphqlQuery> GraphqlResponse doQuery(T query, GraphqlRequestType graphqlRequestType) throws IOException {
+        String json = query.toString();
+        String result = doHttpRequest(json,graphqlRequestType);
+        if(result==null){
+            return null;
+        }
+        GraphqlResponse graphqlResponse = objectMapper.readValue(result, DefaultGraphqlResponse.class);
+        return graphqlResponse;
+    }
+    public <T extends GraphqlRequest> GraphqlResponse doQuery(T query, GraphqlRequestType graphqlRequestType) throws IOException {
         String json = query.toString();
         String result = doHttpRequest(json,graphqlRequestType);
         if(result==null){

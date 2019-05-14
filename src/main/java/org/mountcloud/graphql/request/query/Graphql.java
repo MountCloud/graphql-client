@@ -6,22 +6,29 @@ import org.mountcloud.graphql.request.param.RequestVariable;
 public class Graphql extends GraphqlRequest {
 
     private String parms;
+    private String group;
     private RequestVariable variable;
 
     public Graphql(String method) {
         super(method);
         this.parms = null;
+        this.group = null;
         this.variable = null;
     }
 
     public Graphql(String method, String parms) {
         super(method);
         this.parms = parms;
+        this.group = null;
         this.variable = null;
     }
 
     public void setVariable(RequestVariable variable) {
         this.variable = variable;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
     }
 
     @Override
@@ -33,11 +40,17 @@ public class Graphql extends GraphqlRequest {
         stringQuery
                 .append("query");
 
-        if(this.parms != null) {
+        if (this.parms != null) {
             stringQuery
                     .append("(")
                     .append(this.parms)
                     .append(")");
+        }
+
+        if (this.group != null) {
+            stringQuery
+                    .append("{")
+                    .append(this.group);
         }
 
         stringQuery
@@ -46,6 +59,11 @@ public class Graphql extends GraphqlRequest {
                 .append("}");
 
 
+        if (this.group != null) {
+            stringQuery
+                    .append("}");
+        }
+
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder
@@ -53,11 +71,10 @@ public class Graphql extends GraphqlRequest {
                 .append(stringQuery.toString())
                 .append("\"");
 
-        if(this.variable != null) {
+        if (this.variable != null) {
             stringBuilder
-                    .append(",\"variables\":\"")
-                    .append(this.variable.toString())
-                    .append("\"");
+                    .append(",\"variables\":")
+                    .append(this.variable.toString());
         }
 
         stringBuilder

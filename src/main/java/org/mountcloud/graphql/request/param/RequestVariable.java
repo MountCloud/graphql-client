@@ -32,7 +32,13 @@ public class RequestVariable extends HashMap<String,Object> {
         char connect = ',';
 
         for(String key:keys){
-            stringVal.append(key).append(":").append(packVal(get(key))).append(connect);
+            stringVal
+                    .append("\"")
+                    .append(key)
+                    .append("\"")
+                    .append(":")
+                    .append(packVal(get(key)))
+                    .append(connect);
         }
 
         char last = stringVal.charAt(stringVal.length()-1);
@@ -43,7 +49,7 @@ public class RequestVariable extends HashMap<String,Object> {
 
         stringVal.append("}");
 
-        return "{\"" + this.varibleName + "\":" + stringVal;
+        return "{\"" + this.varibleName + "\":" + stringVal + "}";
     }
 
     private String packVal(Object val){
@@ -56,6 +62,6 @@ public class RequestVariable extends HashMap<String,Object> {
                 || val instanceof Double){
             return String.valueOf(val);
         }
-        return "\\\"" + val + "\\\"";
+        return "\"" + val + "\"";
     }
 }
