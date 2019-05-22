@@ -59,6 +59,27 @@ try {
 }
 ```
 
+query is
+
+```Java
+query{
+  findUsers(sex:"man",age:11){
+    id
+    name
+    age
+    sex
+    class{
+    	name
+	code
+	school{
+	  name
+	}
+    }
+  }
+}
+```
+
+
 do mutation
 
 ```Java
@@ -73,11 +94,24 @@ GraphqlMutation mutation = new DefaultGraphqlMutation("updateUser");
 //create param
 mutation.addParameter("id",1).addParameter("name","123").addParameter("age",18);
 //add more complex attribute to see do query demo
+
+//result
+mutation.addResultAttributes("code");
 try {
     GraphqlResponse response = client.doMutation(mutation);
     //this map is graphql result
     Map data = response.getData();
 } catch (IOException e) {
     e.printStackTrace();
+}
+```
+
+mutation is
+
+```Java
+mutation{
+  updateUser(id:1,name:"123",age:18){
+    code
+  }
 }
 ```
