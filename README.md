@@ -1,4 +1,4 @@
-#English
+# English
 
 ## Graphql Client
 The project is graphql client for java,support custom query and mutation.
@@ -206,7 +206,7 @@ mutation{
 }
 ```
 
-#中文
+# 中文
 
 ## Graphql Client
 该项目是java的graphql客户端，支持自定义query和mutation.
