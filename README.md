@@ -124,7 +124,7 @@ mutation{
 }
 ```
 
-##Complex structure request demo
+## Complex structure request demo
 
 Mutation demo,The query is consistent with the mutation.
 
@@ -332,7 +332,7 @@ mutation{
 }
 ```
 
-##如何实现一个复杂请求
+## 如何实现一个复杂请求
 
 用Mutation做演示,query与mutation原理一样.
 
