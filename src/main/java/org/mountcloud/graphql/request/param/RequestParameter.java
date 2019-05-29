@@ -22,7 +22,7 @@ public class RequestParameter extends HashMap<String,Object> {
      * 添加一个请求参数
      * @param key 参数名
      * @param obj 参数户的值
-     * @return
+     * @return this
      */
     public RequestParameter addParameter(String key, Object obj){
         put(key,obj);
@@ -30,9 +30,25 @@ public class RequestParameter extends HashMap<String,Object> {
     }
 
     /**
+     * 添加一个请求参数
+     * @param key 参数名
+     * @param obj 参数户的值
+     * @return RequestParameter
+     */
+    public RequestParameter addObjectParameter(String key, Object obj){
+        if(obj instanceof RequestObjectParameter){
+            put(key,obj);
+        }else{
+            put(key,new RequestObjectParameter(obj));
+        }
+        return this;
+    }
+
+
+    /**
      * 将Map内的值全部转为请求参数
      * @param map 需要转换的map
-     * @return
+     * @return RequestParameter
      */
     public static RequestParameter buildByMap(Map map){
         RequestParameter requestParameter = build();
@@ -41,8 +57,8 @@ public class RequestParameter extends HashMap<String,Object> {
     }
 
     /**
-     * build一个graphql client
-     * @return graphql client
+     * build一个RequestParameter
+     * @return RequestParameter
      */
     public static RequestParameter build(){
         RequestParameter requestParameter = new RequestParameter();
@@ -97,6 +113,17 @@ public class RequestParameter extends HashMap<String,Object> {
                 || val instanceof Double){
             return String.valueOf(val);
         }
+
+        if(val instanceof Enum){
+            Enum enumVal = (Enum) val;
+            String enumName = enumVal.name();
+            return enumName;
+        }
+
+        if(val instanceof RequestObjectParameter){
+            return val.toString();
+        }
+
         return "\\\""+String.valueOf(val)+"\\\"";
     }
 }
