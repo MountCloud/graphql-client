@@ -77,13 +77,16 @@ public class GraphqlClient {
      * @throws IOException Exception
      */
     public <T extends GraphqlQuery> GraphqlResponse doQuery(T query, GraphqlRequestType graphqlRequestType) throws IOException {
+        return doQuery(query, graphqlRequestType, DefaultGraphqlResponse.class);
+    }
+
+    public <T extends GraphqlQuery, U> U doQuery(T query, GraphqlRequestType graphqlRequestType, Class<U> klass) throws IOException {
         String json = query.toString();
         String result = doHttpRequest(json,graphqlRequestType);
         if(result==null){
             return null;
         }
-        GraphqlResponse graphqlResponse = objectMapper.readValue(result, DefaultGraphqlResponse.class);
-        return graphqlResponse;
+        return objectMapper.readValue(result, klass);
     }
 /////////////////////////////////////////////////////////////////////////////////////
 
@@ -107,14 +110,17 @@ public class GraphqlClient {
      * @throws IOException Exception
      */
     public <T extends GraphqlMutation> GraphqlResponse doMutation(T mutation, GraphqlRequestType graphqlRequestType) throws IOException {
+        return doMutation(mutation, graphqlRequestType, DefaultGraphqlResponse.class);
+    }
+
+
+    public <T extends GraphqlMutation, U> U doMutation(T mutation, GraphqlRequestType graphqlRequestType, Class<U> klass) throws IOException {
         String json = mutation.toString();
         String result = doHttpRequest(json,graphqlRequestType);
         if(result==null){
             return null;
         }
-        GraphqlResponse graphqlResponse = objectMapper.readValue(result, DefaultGraphqlResponse.class);
-
-        return graphqlResponse;
+        return objectMapper.readValue(result, klass);
     }
 
 /////////////////////////////////////////////////////////////////////////////////////
