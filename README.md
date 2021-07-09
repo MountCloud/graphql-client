@@ -9,6 +9,15 @@ You need java1.8 and maven.
 
 Welcome to my home page:[Mount Cloud](http://www.mountcloud.org)
 
+## Update plan V2.0,Update time:Recent months
+
+1:Support proxy setting.
+
+2:Support subquery.
+
+3:Support multiple query.
+
+4:More flexible expansion.
 
 ## Update 1.2 Note
 
@@ -217,6 +226,15 @@ mutation{
 
 欢迎观临我的主页:[Mount Cloud](http://www.mountcloud.org)
 
+## 更新预览V2.0,预计更新时间：最近几个月不忙的时候
+
+1:支持代理服务器.
+
+2:支持子查询.
+
+3:支持多个查询组合.
+
+4:更加灵活的扩展方式.
 
 ## 更新 1.2 日志
 
