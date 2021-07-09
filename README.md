@@ -1,6 +1,7 @@
 # English
 
 ## Graphql Client
+
 The project is graphql client for java,support custom query and mutation.
 
 The current version only supports post requests
@@ -9,28 +10,25 @@ You need java1.8 and maven.
 
 Welcome to my home page:[Mount Cloud](http://www.mountcloud.org)
 
-
 ## Update 1.2 Note
 
 Requested parameters support custom complex types and Enum types.
-
 
 ## Use You Project
 
 maven:
 
-	<dependency>
-		    <groupId>org.mountcloud</groupId>
-		    <artifactId>graphql-client</artifactId>
-		    <version>1.2</version>
-	</dependency>
+    <dependency>
+    	    <groupId>org.mountcloud</groupId>
+    	    <artifactId>graphql-client</artifactId>
+    	    <version>1.2</version>
+    </dependency>
 
 ## Insall Project
 
-	mvn install
+    mvn install
 
-
-## Demo 
+## Demo
 
 do query
 
@@ -87,6 +85,93 @@ query{
 }
 ```
 
+do multiple query
+
+```Java
+//crate client
+GraphqlClient client = GraphqlClient.buildGraphqlClient("http://localhost:8081/graphql");
+//create http headers
+Map<String,String> headers = new HashMap<String,String>();
+headers.put("token","123");
+client.setHttpHeaders(headers);
+//create query
+SubGraphqlQuery subQuery1 = new DefaultSubGraphqlQuery("findUsers1:findUsers");
+//add query or mutation param
+subQuery1.addParameter("sex","man").addParameter("age",11);
+//add query response basics attribute
+subQuery1.addResultAttributes("id","name","age","sex");
+//add query complex attributes
+ResultAttributtes classAttributte1 = new ResultAttributtes("class");
+classAttributte1.addResultAttributes("name","code");
+//attributes can be more complex
+ResultAttributtes schoolAttributte1 = new ResultAttributtes("school");
+schoolAttributte1.addResultAttributes("name");
+//class add school attribute
+classAttributte1.addResultAttributes(schoolAttributte1);
+
+SubGraphqlQuery subQuery2 = new DefaultSubGraphqlQuery("findUsers2:findUsers");
+//add query or mutation param
+subQuery2.addParameter("sex","woman").addParameter("age",12);
+//add query response basics attribute
+subQuery2.addResultAttributes("id","name","age","sex");
+//add query complex attributes
+ResultAttributtes classAttributte2 = new ResultAttributtes("class");
+classAttributte2.addResultAttributes("name","code");
+//attributes can be more complex
+ResultAttributtes schoolAttributte2 = new ResultAttributtes("school");
+schoolAttributte2.addResultAttributes("name");
+//class add school attribute
+classAttributte2.addResultAttributes(schoolAttributte2);
+//do query
+try {
+
+    MultiGraphqlQuery query = new DefaultMultiGraphqlQuery();
+    // add first sub query
+    query.put(subQuery1);
+    // add second sub query
+    query.put(subQuery2);
+    GraphqlResponse response = client.doQuery(query);
+
+    //this map is graphql result
+    Map data = response.getData();
+
+} catch (IOException e) {
+    e.printStackTrace();
+}
+```
+
+query is
+
+```Java
+query{
+  findUsers1:findUsers(sex:"man",age:11){
+    id
+    name
+    age
+    sex
+    class{
+    	name
+	code
+	school{
+	  name
+	}
+    }
+  }
+  findUsers2:findUsers(sex:"woman",age:12){
+    id
+    name
+    age
+    sex
+    class{
+    	name
+	code
+	school{
+	  name
+	}
+    }
+  }
+}
+```
 
 do mutation
 
@@ -128,21 +213,20 @@ mutation{
 
 Mutation demo,The query is consistent with the mutation.
 
-
 ```Java
     @Test
     public void testObjectParameter() throws IOException {
 
 
-        
+
         String serverUrl = "http://localhost:8080/graphql";
-        
+
         GraphqlClient graphqlClient = GraphqlClient.buildGraphqlClient(serverUrl);
 
-        
+
         Map<String,String> httpHeaders = new HashMap<>();
         httpHeaders.put("token","graphqltesttoken");
-        
+
         graphqlClient.setHttpHeaders(httpHeaders);
 
         GraphqlMutation mutation = new DefaultGraphqlMutation("addUser");
@@ -209,36 +293,34 @@ mutation{
 # 中文
 
 ## Graphql Client
-该项目是java的graphql客户端，支持自定义query和mutation.
 
-当前版本仅支持post请求
+该项目是 java 的 graphql 客户端，支持自定义 query 和 mutation.
 
-你需要java1.8和maven.
+当前版本仅支持 post 请求
+
+你需要 java1.8 和 maven.
 
 欢迎观临我的主页:[Mount Cloud](http://www.mountcloud.org)
 
-
 ## 更新 1.2 日志
 
-请求的参数支持自定义复杂类型和Enum类型。
-
+请求的参数支持自定义复杂类型和 Enum 类型。
 
 ## 使用方式
 
 maven:
 
-	<dependency>
-		    <groupId>org.mountcloud</groupId>
-		    <artifactId>graphql-client</artifactId>
-		    <version>1.2</version>
-	</dependency>
+    <dependency>
+    	    <groupId>org.mountcloud</groupId>
+    	    <artifactId>graphql-client</artifactId>
+    	    <version>1.2</version>
+    </dependency>
 
 ## Insall Project
 
-	mvn install
+    mvn install
 
-
-## Demo 
+## Demo
 
 do query
 
@@ -295,6 +377,93 @@ query{
 }
 ```
 
+do multiple query
+
+```Java
+//crate client
+GraphqlClient client = GraphqlClient.buildGraphqlClient("http://localhost:8081/graphql");
+//create http headers
+Map<String,String> headers = new HashMap<String,String>();
+headers.put("token","123");
+client.setHttpHeaders(headers);
+//create query
+SubGraphqlQuery subQuery1 = new DefaultSubGraphqlQuery("findUsers1:findUsers");
+//add query or mutation param
+subQuery1.addParameter("sex","man").addParameter("age",11);
+//add query response basics attribute
+subQuery1.addResultAttributes("id","name","age","sex");
+//add query complex attributes
+ResultAttributtes classAttributte1 = new ResultAttributtes("class");
+classAttributte1.addResultAttributes("name","code");
+//attributes can be more complex
+ResultAttributtes schoolAttributte1 = new ResultAttributtes("school");
+schoolAttributte1.addResultAttributes("name");
+//class add school attribute
+classAttributte1.addResultAttributes(schoolAttributte1);
+
+SubGraphqlQuery subQuery2 = new DefaultSubGraphqlQuery("findUsers2:findUsers");
+//add query or mutation param
+subQuery2.addParameter("sex","woman").addParameter("age",12);
+//add query response basics attribute
+subQuery2.addResultAttributes("id","name","age","sex");
+//add query complex attributes
+ResultAttributtes classAttributte2 = new ResultAttributtes("class");
+classAttributte2.addResultAttributes("name","code");
+//attributes can be more complex
+ResultAttributtes schoolAttributte2 = new ResultAttributtes("school");
+schoolAttributte2.addResultAttributes("name");
+//class add school attribute
+classAttributte2.addResultAttributes(schoolAttributte2);
+//do query
+try {
+
+    MultiGraphqlQuery query = new DefaultMultiGraphqlQuery();
+    // add first sub query
+    query.put(subQuery1);
+    // add second sub query
+    query.put(subQuery2);
+    GraphqlResponse response = client.doQuery(query);
+
+    //this map is graphql result
+    Map data = response.getData();
+
+} catch (IOException e) {
+    e.printStackTrace();
+}
+```
+
+query is
+
+```Java
+query{
+  findUsers1:findUsers(sex:"man",age:11){
+    id
+    name
+    age
+    sex
+    class{
+    	name
+	code
+	school{
+	  name
+	}
+    }
+  }
+  findUsers2:findUsers(sex:"woman",age:12){
+    id
+    name
+    age
+    sex
+    class{
+    	name
+	code
+	school{
+	  name
+	}
+    }
+  }
+}
+```
 
 do mutation
 
@@ -334,23 +503,22 @@ mutation{
 
 ## 如何实现一个复杂请求
 
-用Mutation做演示,query与mutation原理一样.
-
+用 Mutation 做演示,query 与 mutation 原理一样.
 
 ```Java
     @Test
     public void testObjectParameter() throws IOException {
 
 
-        
+
         String serverUrl = "http://localhost:8080/graphql";
-        
+
         GraphqlClient graphqlClient = GraphqlClient.buildGraphqlClient(serverUrl);
 
-        
+
         Map<String,String> httpHeaders = new HashMap<>();
         httpHeaders.put("token","graphqltesttoken");
-        
+
         graphqlClient.setHttpHeaders(httpHeaders);
 
         GraphqlMutation mutation = new DefaultGraphqlMutation("addUser");
