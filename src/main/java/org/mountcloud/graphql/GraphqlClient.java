@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.mountcloud.graphql.request.GraphqlRequestType;
 import org.mountcloud.graphql.request.mutation.GraphqlMutation;
 import org.mountcloud.graphql.request.query.GraphqlQuery;
+import org.mountcloud.graphql.request.query.MultiGraphqlQuery;
 import org.mountcloud.graphql.response.DefaultGraphqlResponse;
 import org.mountcloud.graphql.response.GraphqlResponse;
 import org.mountcloud.graphql.util.HttpClientUtil;
@@ -77,6 +78,34 @@ public class GraphqlClient {
      * @throws IOException Exception
      */
     public <T extends GraphqlQuery> GraphqlResponse doQuery(T query, GraphqlRequestType graphqlRequestType) throws IOException {
+        String json = query.toString();
+        String result = doHttpRequest(json,graphqlRequestType);
+        if(result==null){
+            return null;
+        }
+        GraphqlResponse graphqlResponse = objectMapper.readValue(result, DefaultGraphqlResponse.class);
+        return graphqlResponse;
+    }
+    /**
+     * 执行查询
+     * @param query exec query
+     * @param <T> query
+     * @return response
+     * @throws IOException Exception
+     */
+    public <T extends MultiGraphqlQuery> GraphqlResponse doQuery(T query) throws IOException {
+        return doQuery(query, GraphqlRequestType.POST);
+    }
+
+    /**
+     * 执行查询
+     * @param query  exec query
+     * @param graphqlRequestType request type get or post,but no get now
+     * @param <T> 继承 query
+     * @return response
+     * @throws IOException Exception
+     */
+    public <T extends MultiGraphqlQuery> GraphqlResponse doQuery(T query, GraphqlRequestType graphqlRequestType) throws IOException {
         String json = query.toString();
         String result = doHttpRequest(json,graphqlRequestType);
         if(result==null){
